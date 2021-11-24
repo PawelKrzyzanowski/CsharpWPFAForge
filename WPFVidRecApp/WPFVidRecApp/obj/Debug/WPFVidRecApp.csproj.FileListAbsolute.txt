@@ -1,0 +1,16 @@
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\bin\Debug\WPFVidRecApp.exe.config
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\bin\Debug\WPFVidRecApp.exe
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\bin\Debug\WPFVidRecApp.pdb
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.csproj.AssemblyReference.cache
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\MainWindow.g.cs
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\App.g.cs
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp_MarkupCompile.cache
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp_MarkupCompile.lref
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\MainWindow.baml
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.g.resources
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.Properties.Resources.resources
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.csproj.GenerateResource.cache
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.csproj.CoreCompileInputs.cache
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.exe
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\WPFVidRecApp.pdb
+C:\Users\pakrz\source\repos\CsharpWPFAForge\WPFVidRecApp\WPFVidRecApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
