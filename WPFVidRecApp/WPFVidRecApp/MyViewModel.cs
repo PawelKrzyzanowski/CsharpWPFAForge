@@ -7,7 +7,10 @@ using System.Windows; /*Message box*/
 using System.Windows.Media.Imaging; /*BitmapImage*/
 using System.Collections.ObjectModel; /* ObservableCollection */
 using System.Drawing; /* Rectangle */
+using System.Drawing.Imaging;
 using System.Windows.Input; /* ICommand */
+using System.IO; /* MemoryStream in  */
+using System.Windows.Threading; /* Dispatcher */
 
 using GalaSoft.MvvmLight; /* ObservableObject*/
 using GalaSoft.MvvmLight.CommandWpf; 
@@ -19,7 +22,7 @@ using Accord.Video.FFMPEG; /*VideoFileWriter*/
 
 namespace WPFVidRecApp
 {
-    internal class MyViewModel : GalaSoft.MvvmLight.ObservableObject
+    internal class MyViewModel : GalaSoft.MvvmLight.ObservableObject, IDisposable
     {      
         #region Private fields
         private AForge.Video.DirectShow.FilterInfo _inputVideoDevice;
@@ -111,40 +114,46 @@ namespace WPFVidRecApp
             }
         }
 
-        private void newFrameEventHandler(object sender, NewFrameEventArgs eventArgs)
+        private void myNewFrameEventHandler(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
-            /*
             try
             {
+                /*
                 if (_isRecording)
                 {
                     using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
                     {
                         if (_firstFrameTime != null)
                         {
-                            _writer.WriteVideoFrame(bitmap, DateTime.Now - _firstFrameTime.Value);
+                            _videoFileWriter.WriteVideoFrame(bitmap, DateTime.Now - _firstFrameTime.Value);
                         }
                         else
                         {
-                            _writer.WriteVideoFrame(bitmap);
+                            _videoFileWriter.WriteVideoFrame(bitmap);
                             _firstFrameTime = DateTime.Now;
                         }
                     }
                 }
-                using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
+                */
+                /* Clone() returns image from the AForge.Video.NewFrameEventArgs eventArgs and it's mapped to Bitmap type */
+                using (var bmp = (Bitmap)eventArgs.Frame.Clone())
                 {
-                    var bi = bitmap.ToBitmapImage();
-                    bi.Freeze();
-                    Dispatcher.CurrentDispatcher.Invoke(() => Image = bi);
+                    var bmpImg = bmp.convertBitmapToBitmapImage(); /* had to be defined in referenced STATIC class */
+                    bmpImg.Freeze(); /* Freeze make the bmpImg unmodifable and sets it's Frozen property to true */
+                    /* Dispatcher provides services formanaging the queue of task for a thread */
+                    /* CurrentDispatcher is Property of Dipsatcher, associated with the Dispatcher for a task  */
+                    /* Ivoke() executes the task described in argument */
+                    /* () => Bitmap = bmpImg   ---   that's the task , the syntax is () = > function */
+                    /* So my task is to save frozen bitmapImage to _bitmap field */
+                    Dispatcher.CurrentDispatcher.Invoke( () => Bitmap = bmpImg );
                 }
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                StopCamera();
+                //StopAquisition();
             }
-            */
         }
 
         private void startAquisition()
@@ -160,8 +169,12 @@ namespace WPFVidRecApp
                     /* Union sums up rectagnles for all the displays */
                     rectangle = Rectangle.Union(rectangle, screen.Bounds);
                 }
-                _videoSourceInterface = new ScreenCaptureStream(rectangle);
-                _videoSourceInterface.NewFrame += newFrameEventHandler;
+                /* The ScreenCaptureSystem heritages after AForge.Video.IVideoSource */
+                /* The ScreenCaptureSystem provides public event NewFrameEventHandler, Frames Received, BytesReceived, FrameInterval,
+                IsRunning, VideoSourceErrorEventHandler, Start, Stop etc. ... */
+                AForge.Video.IVideoSource _videoSourceInterface = new ScreenCaptureStream(rectangle);
+                /* I use C# delegate here associating my method with AForge newFrameEventHandler */
+                _videoSourceInterface.NewFrame += myNewFrameEventHandler;
                 _videoSourceInterface.Start();
             }
             /*
@@ -186,7 +199,11 @@ namespace WPFVidRecApp
             }
             */
         }
-
         #endregion
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

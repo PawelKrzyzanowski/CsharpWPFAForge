@@ -24,5 +24,10 @@ namespace WPFVidRecApp
         {
             InitializeComponent();
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

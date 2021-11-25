@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFVidRecApp"
         mc:Ignorable="d"
-        Title="My Video Recorder" Height="619" Width="536">
+        Title="My Video Recorder" Height="620" Width="540">
     <Window.DataContext>
         <local:MyViewModel />
     </Window.DataContext>
@@ -79,14 +79,14 @@
                         Height="30"
                         Margin="5"
                         HorizontalAlignment="Right"
-                        Command="{Binding StartSourceCommand}"
+                        Command="{Binding StartAquisitionCommand}"
                         Content="Start video" />
                 <Button Grid.Column="1"
                         Width="100"
                         Height="30"
                         Margin="5"
                         HorizontalAlignment="Left"
-                        Command="{Binding StopSourceCommand}"
+                        Command="{Binding StopAquisitionCommand}"
                         Content="Stop video" />
             </StackPanel>
         </Grid>
